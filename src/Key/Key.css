@@ -1,0 +1,13 @@
+.Key, .Num, .Note {
+  display: inline;
+}
+
+.Key {
+  padding: 1.7em 1em 1em;
+  border: 2px solid black;
+}
+
+.Num {
+  position: absolute;
+  bottom: 22%;
+}

@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.App-Keyboard {
+  position: fixed;
+  bottom: 2%;
+  text-align: center;
+  width: 100%;
+}
+
+.system-bpm-container, .div-bpm, .div-system {
+  display: inline-block;
+}
+
+.div-bpm {
+  right: 2%;
+  position: absolute;
+}
+
+.div-system {
+  left: 2%;
+  position: absolute;
+}
