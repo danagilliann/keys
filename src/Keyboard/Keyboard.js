@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../Keyboard/Keyboard.css';
 import Key from '../Key/Key';
 import Harmonic from '../Systems/Harmonic';
-// import './index.css';
 
 export default class Keyboard extends Component {
 
@@ -31,6 +30,7 @@ export default class Keyboard extends Component {
 
     if (evt.keyCode === KEY1) {
       this.harmonic.key1();
+      this.harmonic.animateKey1();
     } else if (evt.keyCode === KEY2) {
       this.harmonic.key2();
     } else if (evt.keyCode === KEY3) {
@@ -55,11 +55,13 @@ export default class Keyboard extends Component {
       let keyArray = [];
 
       for (let i = 1; i < 6; i++) {
-        keyArray.push(<Key note={String.fromCharCode(ASCII + i)} num={i} key={i}/>);
+        let note = String.fromCharCode(ASCII + i);
+
+        keyArray.push(<Key note={note} num={i} key={i} />);
       }
       // Notes A and B
-      keyArray.push(<Key note={'A'} num={6} key={6}/>)
-      keyArray.push(<Key note={'B'} num={7} key={7}/>)
+      keyArray.push(<Key note={'A'} num={6} key={6} />);
+      keyArray.push(<Key note={'B'} num={7} key={7} />);
 
       return keyArray;
   }

@@ -13,9 +13,11 @@ export default class Key extends Component {
   }
 
   render() {
+    let id = this.state.note.concat('-').concat(this.state.num);
+
     return(
       <div className="Key">
-        <h1 className="Note">{this.state.note}</h1>
+        <h1 className="Note" id={id}>{this.state.note}</h1>
         <p className="Num">{this.state.num}</p>
       </div>
     );
