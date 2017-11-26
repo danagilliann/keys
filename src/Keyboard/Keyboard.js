@@ -10,8 +10,8 @@ export default class Keyboard extends Component {
   constructor(props) {
     super(props);
 
-    this.audioContext = this._returnAudioContext.bind(this);
-    this.harmonic = this._returnHarmonic.bind(this);
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    this.harmonic = new Harmonic(this.audioContext);
 
     this.state = {
       system: 'Harmonic',
@@ -20,15 +20,6 @@ export default class Keyboard extends Component {
     this._handleKeyDown = this._handleKeyDown.bind(this);
   }
 
-  _returnAudioContext() {
-    return new (window.AudioContext || window.webkitAudioContext)();
-  }
-
-  _returnHarmonic() {
-    return new Harmonic(this.audioContext);
-  }
-
-  // TODO: Figure this out (ie: this.harmonic === undefined)
   _handleKeyDown(evt) {
     const KEY1 = 49;
     const KEY2 = 50;
@@ -39,25 +30,19 @@ export default class Keyboard extends Component {
     const KEY7 = 55;
 
     if (evt.keyCode === KEY1) {
-      console.log('ac');
+      this.harmonic.key1();
     } else if (evt.keyCode === KEY2) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key2();
     } else if (evt.keyCode === KEY3) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key3();
     } else if (evt.keyCode === KEY4) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key4();
     } else if (evt.keyCode === KEY5) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key5();
     } else if (evt.keyCode === KEY6) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key6();
     } else if (evt.keyCode === KEY7) {
-      console.log(evt.keyCode);
-
+      this.harmonic.key7();
     }
   }
 
@@ -66,11 +51,15 @@ export default class Keyboard extends Component {
   }
 
   getKeys() {
+      const ASCII = 66;
       let keyArray = [];
 
-      for (let i = 1; i < 8; i++) {
-        keyArray.push(<Key note={'C'} num={i} key={i}/>);
+      for (let i = 1; i < 6; i++) {
+        keyArray.push(<Key note={String.fromCharCode(ASCII + i)} num={i} key={i}/>);
       }
+      // Notes A and B
+      keyArray.push(<Key note={'A'} num={6} key={6}/>)
+      keyArray.push(<Key note={'B'} num={7} key={7}/>)
 
       return keyArray;
   }
