@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../Keyboard/Keyboard.css';
 import Key from '../Key/Key';
 import Harmonic from '../Systems/Harmonic';
+import Pythag from '../Systems/Pythag';
+import Et from '../Systems/Et';
+
 
 export default class Keyboard extends Component {
 
@@ -11,13 +14,28 @@ export default class Keyboard extends Component {
 
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     this.harmonic = new Harmonic(this.audioContext);
+    this.pythag = new Pythag(this.audioContext);
+    this.et = new Et(this.audioContext);
 
     this.state = {
-      system: 'Harmonic',
+      system: props.system,
     }
 
     this._handleKeyDown = this._handleKeyDown.bind(this);
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Keyboard this state ' + this.state.system);
+  }
+
+  componentWillUpdate(props, state) {
+    if (props.system !== this.state.system) {
+      this.setState((prevState, props) => ({
+        system: props.system
+      }));
+    }
+  }
+
 
   _handleKeyDown(evt) {
     const KEY1 = 49;
@@ -28,21 +46,65 @@ export default class Keyboard extends Component {
     const KEY6 = 54;
     const KEY7 = 55;
 
+    // console.log(this.state);
+
     if (evt.keyCode === KEY1) {
-      this.harmonic.key1();
-      this.harmonic.animateKey1();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key1();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key1();
+      } else if (this.state.system === 'ET') {
+
+      }
+      // this.harmonic.animateKey1();
     } else if (evt.keyCode === KEY2) {
-      this.harmonic.key2();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key2();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key2();
+      } else if (this.state.system === 'ET') {
+
+      }
     } else if (evt.keyCode === KEY3) {
-      this.harmonic.key3();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key3();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key3();
+      } else if (this.state.system === 'ET') {
+
+      }
     } else if (evt.keyCode === KEY4) {
-      this.harmonic.key4();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key4();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key4();
+      } else if (this.state.system === 'ET') {
+
+      }
     } else if (evt.keyCode === KEY5) {
-      this.harmonic.key5();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key5();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key5();
+      } else if (this.state.system === 'ET') {
+
+      }
     } else if (evt.keyCode === KEY6) {
-      this.harmonic.key6();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key6();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key6();
+      } else if (this.state.system === 'ET') {
+
+      }
     } else if (evt.keyCode === KEY7) {
-      this.harmonic.key7();
+      if (this.state.system === 'Harmonic') {
+        this.harmonic.key7();
+      } else if (this.state.system === 'Pythag') {
+        this.pythag.key7();
+      } else if (this.state.system === 'ET') {
+
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import Dropdown from 'react-dropdown';
 import './App.css';
 import Keyboard from './Keyboard/Keyboard.js';
 
+
 class App extends Component {
 
   constructor(props) {
@@ -12,14 +13,18 @@ class App extends Component {
       bpm: 120,
       system: 'Harmonic'
     }
+
+    this._setSystem = this._setSystem.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App state.system ' + this.state.system);
   }
 
   _setSystem(option) {
-    this.setState((prevState) => {
-      return {system: option.label};
-    });
-    // this.setState({system: option.label});
-    console.log(this.state);
+    this.setState((prevState, props) => ({
+      system: option.label
+    }));
   }
 
   render() {
@@ -35,12 +40,11 @@ class App extends Component {
             </h1>
           </div>
           <div className='div-system'>
-              {/*// TODO: Style */}
               <Dropdown options={options} onChange={this._setSystem} value={defaultOption} placeholder='Harmonic' />
           </div>
         </div>
         <div className='App-Keyboard'>
-          <Keyboard />
+          <Keyboard system={ this.state.system }/>
         </div>
       </div>
     );

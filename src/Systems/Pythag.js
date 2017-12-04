@@ -1,6 +1,6 @@
 import Sound from '../Sounds/Sounds.js';
 
-export default class Harmonic {
+export default class Pythag {
 
   constructor(audioContext) {
     this.audioContext = audioContext;
