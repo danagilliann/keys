@@ -14,9 +14,12 @@ class App extends Component {
     }
   }
 
-  _setSystem() {
-    // TODO: Implement
-    // console.log('Hello');
+  _setSystem(option) {
+    this.setState((prevState) => {
+      return {system: option.label};
+    });
+    // this.setState({system: option.label});
+    console.log(this.state);
   }
 
   render() {
@@ -33,7 +36,7 @@ class App extends Component {
           </div>
           <div className='div-system'>
               {/*// TODO: Style */}
-              <Dropdown options={options} onChange={this.setSystem} value={defaultOption} placeholder='Harmonic' />
+              <Dropdown options={options} onChange={this._setSystem} value={defaultOption} placeholder='Harmonic' />
           </div>
         </div>
         <div className='App-Keyboard'>
