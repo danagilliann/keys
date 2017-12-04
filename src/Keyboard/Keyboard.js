@@ -54,7 +54,7 @@ export default class Keyboard extends Component {
       } else if (this.state.system === 'Pythag') {
         this.pythag.key1();
       } else if (this.state.system === 'ET') {
-
+        this.et.key1();
       }
       // this.harmonic.animateKey1();
     } else if (evt.keyCode === KEY2) {
@@ -63,7 +63,7 @@ export default class Keyboard extends Component {
       } else if (this.state.system === 'Pythag') {
         this.pythag.key2();
       } else if (this.state.system === 'ET') {
-
+        this.et.key2();
       }
     } else if (evt.keyCode === KEY3) {
       if (this.state.system === 'Harmonic') {
@@ -71,7 +71,7 @@ export default class Keyboard extends Component {
       } else if (this.state.system === 'Pythag') {
         this.pythag.key3();
       } else if (this.state.system === 'ET') {
-
+        this.et.key3();
       }
     } else if (evt.keyCode === KEY4) {
       if (this.state.system === 'Harmonic') {
@@ -87,7 +87,7 @@ export default class Keyboard extends Component {
       } else if (this.state.system === 'Pythag') {
         this.pythag.key5();
       } else if (this.state.system === 'ET') {
-
+        this.et.key5();
       }
     } else if (evt.keyCode === KEY6) {
       if (this.state.system === 'Harmonic') {
@@ -103,7 +103,7 @@ export default class Keyboard extends Component {
       } else if (this.state.system === 'Pythag') {
         this.pythag.key7();
       } else if (this.state.system === 'ET') {
-
+        this.et.key7();
       }
     }
   }

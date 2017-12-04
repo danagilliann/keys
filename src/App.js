@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropdown from 'react-dropdown';
 import './App.css';
 import Keyboard from './Keyboard/Keyboard.js';
+import Sound from './Sounds/Sounds.js';
 
 
 class App extends Component {
@@ -9,12 +10,31 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
     this.state = {
       bpm: 120,
       system: 'Harmonic'
     }
 
     this._setSystem = this._setSystem.bind(this);
+    this.rhythm = this.rhythm.bind(this);
+    this.sleep = this.sleep.bind(this)
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async rhythm() {
+    let note = new Sound(this.audioContext);
+    let now = this.audioContext.currentTime;
+
+    // while (true) {
+      console.log('hello');
+      note.beat(120, now, 0.3, this.state.bpm);
+      // await this.sleep(1000);
+    // }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,6 +50,8 @@ class App extends Component {
   render() {
     const options = ['Harmonic', 'Pythag', 'ET'];
     const defaultOption = options[0];
+
+    this.rhythm();
 
     return (
       <div className='App'>

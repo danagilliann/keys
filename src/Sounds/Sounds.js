@@ -13,6 +13,21 @@ export default class Sound {
     this.oscillator.type = 'sine';
   }
 
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async beat(freq_value, startTime, volume, bpm) {
+    let sleep = 60.0 / bpm
+    this.init();
+
+    this.oscillator.frequency.value = freq_value;
+    this.gain.gain.setValueAtTime(volume, this.audioContext.currentTime);
+
+    this.oscillator.start(startTime);
+    this.stop(startTime + sleep);
+  }
+
   play(freq_value, startTime, endTime, volume) {
       this.init();
 
