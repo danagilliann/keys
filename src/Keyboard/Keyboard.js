@@ -24,10 +24,6 @@ export default class Keyboard extends Component {
     this._handleKeyDown = this._handleKeyDown.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('Keyboard this state ' + this.state.system);
-  }
-
   componentWillUpdate(props, state) {
     if (props.system !== this.state.system) {
       this.setState((prevState, props) => ({
