@@ -6,11 +6,10 @@ import Pythag from '../Systems/Pythag';
 import Et from '../Systems/Et';
 import Ptolemy from '../Systems/Ptolemy';
 import MeanTone from '../Systems/MeanTone';
-
+import Guide from '../Guide/Guide.js';
 
 export default class Keyboard extends Component {
 
-  // TODO: Function to pass in right notes depending on system passed in
   constructor(props) {
     super(props);
 
@@ -167,6 +166,10 @@ export default class Keyboard extends Component {
     document.addEventListener('keydown', this._handleKeyDown);
   }
 
+  _keyboardText() {
+    return 'Use the number 1, 2, 3, 4, 5, 6, or 7 on your keyboard to play a tune.';
+  }
+
   getKeys() {
       const ASCII = 66;
       let keyArray = [];
@@ -186,6 +189,16 @@ export default class Keyboard extends Component {
   render() {
     const keyArray = this.getKeys();
 
-    return <div className='Keyboard'>{ keyArray }</div>;
+    return (
+      <div>
+        <Guide guideText={this._keyboardText()} guideId='guide-keyboard' />
+        <div className='Keyboard'>
+          { keyArray }
+        </div>
+        {/*<div>
+          'Use the number 1, 2, 3, 4, 5, 6, or 7 on your keyboard to play a tune.'
+        </div>*/}
+      </div>
+    );
   }
 }

@@ -4,6 +4,7 @@ import './App.css';
 import Keyboard from './Keyboard/Keyboard.js';
 import Sound from './Sounds/Sounds.js';
 import Dilla from 'dilla';
+import Guide from './Guide/Guide.js';
 
 class App extends Component {
 
@@ -47,6 +48,14 @@ class App extends Component {
   }
 
   componentWillUpdate(props, state) {
+  }
+
+  _systemText() {
+    return 'Pick a system here.';
+  }
+
+  _bpmText() {
+    return 'Change the BPM of the metronome here.';
   }
 
   _setSystem(option) {
@@ -135,8 +144,9 @@ class App extends Component {
           <div className='div-bpm'>
             <input type='text' value={this.state.proxy_bpm} onChange={this._setBpm} className='bpm' />
             <button className='bpm-changer' onClick={this._changeBpm}>
-              Change bpm
+              Change BPM
             </button>
+            <Guide guideText={this._bpmText()} guideId='guide-bpm' />
           </div>
           {/* <div className='div-meter'>
             <input type='text' value={this.state.proxy_meter} onChange={this._setMeter} className='meter' />
@@ -144,9 +154,12 @@ class App extends Component {
               Change meter
             </button>
           </div>*/}
+
           <div className='div-system'>
               <Dropdown options={options} onChange={this._setSystem} value={defaultOption} placeholder='Harmonic' />
+              <Guide guideText={this._systemText()} guideId='guide-system' />
           </div>
+
         </div>
         <div className='App-Keyboard'>
           <Keyboard system={ this.state.system }/>

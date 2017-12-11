@@ -3,11 +3,11 @@
 }
 
 .Key {
-  padding: 1.7em 1em 1em;
+  padding: 2.7em 2em 1.7em 2em;
   border: 2px solid black;
 }
 
 .Num {
   position: absolute;
-  bottom: 22%;
+  /*bottom: 22%;*/
 }
