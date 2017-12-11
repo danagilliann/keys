@@ -13,18 +13,25 @@ class App extends Component {
     this.state = {
       proxy_bpm: 120,
       bpm: 120,
-      system: 'Harmonic'
+      system: 'Harmonic',
+      proxy_meter: 4,
+      meter: 4,
     }
 
     this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     this.dilla = new Dilla(this.audioContext, { 'tempo': this.state.bpm });
 
     this._setSystem = this._setSystem.bind(this);
+    this._dillaSetup = this._dillaSetup.bind(this);
+
     this._startRhythm = this._startRhythm.bind(this);
     this._stopRhythm = this._stopRhythm.bind(this);
-    this.setBpm = this.setBpm.bind(this);
-    this._dillaSetup = this._dillaSetup.bind(this);
-    this.changeBpm = this.changeBpm.bind(this);
+
+    this._setBpm = this._setBpm.bind(this);
+    this._changeBpm = this._changeBpm.bind(this);
+
+    this._setMeter = this._setMeter.bind(this);
+    this._changeMeter = this._changeMeter.bind(this);
   }
 
   componentDidMount() {
@@ -37,13 +44,9 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('didUpdate');
-    this._startRhythm();
   }
 
   componentWillUpdate(props, state) {
-    console.log('willUpdate');
-    // this._stopRhythm();
   }
 
   _setSystem(option) {
@@ -64,9 +67,9 @@ class App extends Component {
     var high = {
       'position': '*.1.01',
       'freq': 440,
-      'duration': 8
+      'duration': 15
     };
-    let low = { 'freq': 330, 'duration': 8 };
+    let low = { 'freq': 330, 'duration': 15 };
 
     this.dilla.set('metronome', [
       high,
@@ -94,33 +97,53 @@ class App extends Component {
     });
   }
 
-  setBpm(evt) {
-    console.log(evt.target.value);
-    this.setState({proxy_bpm: parseInt(evt.target.value, 10)});
+  _setBpm(evt) {
+    this.setState({proxy_bpm: evt.target.value});
   }
 
-  changeBpm(evt) {
+  _changeBpm(evt) {
     evt.preventDefault();
 
+    this.setState({proxy_bpm: parseInt(this.state.proxy_bpm, 10)})
     this.setState({bpm: this.state.proxy_bpm});
-    this.dilla.setTempo(this.state.proxy_bpm);
 
-    console.log(this.state);
+    this.dilla.setTempo(parseInt(this.state.proxy_bpm, 10));
+  }
+
+  _setMeter(evt) {
+    this.setState({proxy_meter: evt.target.value});
+  }
+
+  _changeMeter(evt) {
+    evt.preventDefault();
+
+    this.setState({proxy_meter: parseInt(this.state.proxy_meter, 10)})
+    this.setState({meter: this.state.proxy_meter});
+
+    this.dilla.setBeatsPerBar(parseInt(this.state.proxy_meter, 10));
+
+    console.log(this.dilla);
   }
 
   render() {
-    const options = ['Harmonic', 'Pythag', 'ET'];
+    const options = ['Harmonic', 'Pythag', 'ET', 'Ptolemy', 'Mean Tone'];
     const defaultOption = options[0];
 
     return (
       <div className='App'>
         <div className='system-bpm-container'>
           <div className='div-bpm'>
-              <input type='text' value={this.state.proxy_bpm} onChange={this.setBpm} className='bpm' />
-              <button onClick={this.changeBpm}>
-                Change bpm
-              </button>
+            <input type='text' value={this.state.proxy_bpm} onChange={this._setBpm} className='bpm' />
+            <button className='bpm-changer' onClick={this._changeBpm}>
+              Change bpm
+            </button>
           </div>
+          {/* <div className='div-meter'>
+            <input type='text' value={this.state.proxy_meter} onChange={this._setMeter} className='meter' />
+            <button className='meeter-changer' onClick={this._changeMeter}>
+              Change meter
+            </button>
+          </div>*/}
           <div className='div-system'>
               <Dropdown options={options} onChange={this._setSystem} value={defaultOption} placeholder='Harmonic' />
           </div>

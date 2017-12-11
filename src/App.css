@@ -13,9 +13,13 @@
   display: inline-block;
 }
 
-.div-bpm {
+.div-bpm, .div-meter {
   right: 2%;
   position: absolute;
+}
+
+.div-meter {
+  margin-top: 2em;
 }
 
 .div-system {
